@@ -9,6 +9,9 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -21,13 +24,13 @@ public class Stormy extends AppCompatActivity {
     // Current code throws a "Network on main thread exception"
     // This task is "Synchronous". Need to switch to Asynchronous
     public static final String TAG = Stormy.class.getSimpleName();
-    private TextView textView;
+
+    private CurrentWeather mCurrentWeather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textView = findViewById(R.id.textView);
 
         String apiKey = "2cd94b53ee1806c983d10d877b5c94bd";
         double latitude = 36.1699;
@@ -49,16 +52,18 @@ public class Stormy extends AppCompatActivity {
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     try {
-                        Log.v(TAG, response.body().string());
+                        String jsonData = response.body().string();
                         if (response.isSuccessful()) {
-
+                            mCurrentWeather = getCurrentDetails(jsonData);
 
                         } else {
                             alertUserAboutError();
                         }
-                    } catch (IOException e) {
+                    }
+                    catch (IOException | JSONException e) {
                         Log.e(TAG, "Exception caught: ", e);
                     }
+
                 }
             });
         } else {
@@ -66,6 +71,13 @@ public class Stormy extends AppCompatActivity {
         }
 
 
+    }
+
+    private CurrentWeather getCurrentDetails(String jsonData) throws JSONException {
+        JSONObject forecast = new JSONObject(jsonData);
+        String timezone = forecast.getString("timezone");
+        Log.i(TAG,"From JSON "+ timezone);
+        return new CurrentWeather();
     }
 
     private boolean isNetworkAvailable() {

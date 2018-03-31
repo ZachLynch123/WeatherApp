@@ -10,6 +10,8 @@ public class CurrentWeather {
     private double mPrecipChance;
     private String mSummary;
 
+
+
     public String getIcon() {
         return mIcon;
     }
@@ -45,7 +47,6 @@ public class CurrentWeather {
     public double getPrecipChance() {
         return mPrecipChance;
     }
-
     public void setPrecipChance(double precipChance) {
         mPrecipChance = precipChance;
     }
