@@ -30,8 +30,8 @@ public class Stormy extends AppCompatActivity {
         textView = findViewById(R.id.textView);
 
         String apiKey = "2cd94b53ee1806c983d10d877b5c94bd";
-        double latitude = 37.8267;
-        double longitude = -122.4233;
+        double latitude = 36.1699;
+        double longitude = -115.1398;
         String forecastUrl = "https://api.darksky.net/forecast/" + apiKey + "/" +
                 latitude + "," + longitude;
         if (isNetworkAvailable()) {
@@ -62,7 +62,7 @@ public class Stormy extends AppCompatActivity {
                 }
             });
         } else {
-            Toast.makeText(this, R.string.network_unavailable_message, Toast.LENGTH_LONG);
+            Toast.makeText(this, R.string.network_unavailable_message, Toast.LENGTH_LONG).show();
         }
 
 
