@@ -1,10 +1,13 @@
 package nteractivetory.com.example.android.weatherapp;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -31,35 +34,50 @@ public class Stormy extends AppCompatActivity {
         double longitude = -122.4233;
         String forecastUrl = "https://api.darksky.net/forecast/" + apiKey + "/" +
                 latitude + "," + longitude;
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(forecastUrl)
-                .build();
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
+        if (isNetworkAvailable()) {
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(forecastUrl)
+                    .build();
+            Call call = client.newCall(request);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
 
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    Log.v(TAG, response.body().string());
-                    if (response.isSuccessful()){
-
-
-                    }
-                    else {
-                        alertUserAboutError();
-                    }
-                } catch (IOException e) {
-                    Log.e(TAG, "Exception caught: ", e);
                 }
-            }
-        });
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    try {
+                        Log.v(TAG, response.body().string());
+                        if (response.isSuccessful()) {
 
 
+                        } else {
+                            alertUserAboutError();
+                        }
+                    } catch (IOException e) {
+                        Log.e(TAG, "Exception caught: ", e);
+                    }
+                }
+            });
+        } else {
+            Toast.makeText(this, R.string.network_unavailable_message, Toast.LENGTH_LONG);
+        }
+
+
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager manager = (ConnectivityManager)
+                getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+        boolean isAvailable = false;
+        if (networkInfo != null && networkInfo.isConnected()) {
+            isAvailable = true;
+
+        }
+        return isAvailable;
     }
 
     private void alertUserAboutError() {
