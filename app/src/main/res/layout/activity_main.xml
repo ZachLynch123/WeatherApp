@@ -8,4 +8,14 @@
     tools:context="nteractivetory.com.example.android.weatherapp.Stormy">
 
 
+    <TextView
+        android:id="@+id/temperatureView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="100"
+        android:textColor="@color/Cyan"
+        android:textSize="150sp" />
+
 </RelativeLayout>
