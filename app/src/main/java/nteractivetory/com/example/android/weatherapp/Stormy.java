@@ -31,6 +31,7 @@ public class Stormy extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getActionBar().hide();
 
         String apiKey = "2cd94b53ee1806c983d10d877b5c94bd";
         double latitude = 36.1699;
