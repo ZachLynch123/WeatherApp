@@ -1,6 +1,9 @@
 package nteractivetory.com.example.android.weatherapp;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class CurrentWeather {
     private String mIcon;
@@ -9,8 +12,15 @@ public class CurrentWeather {
     private double mHumidity;
     private double mPrecipChance;
     private String mSummary;
+    private String mTimeZone;
 
+    public String getTimeZone() {
+        return mTimeZone;
+    }
 
+    public void setTimeZone(String timeZone) {
+        mTimeZone = timeZone;
+    }
 
     public String getIcon() {
         return mIcon;
@@ -22,6 +32,14 @@ public class CurrentWeather {
 
     public long getTime() {
         return mTime;
+    }
+
+    public String getFormattedTime(){
+        SimpleDateFormat formatter = new SimpleDateFormat("h:mm: a");
+        formatter.setTimeZone(TimeZone.getTimeZone(getTimeZone()));
+        Date dateTime = new Date(getTime() * 1000);
+        String timeString = formatter.format(dateTime);
+        return timeString;
     }
 
     public void setTime(long time) {
