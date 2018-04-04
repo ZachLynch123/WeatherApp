@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Dark_Gray"
-    tools:context="nteractivetory.com.example.android.weatherapp.Stormy">
+    tools:context="nteractivetory.com.example.android.weatherapp.Stormy"
+    android:padding="32dp"
+    >
 
 
     <TextView
@@ -17,5 +19,35 @@
         android:text="100"
         android:textColor="@color/Cyan"
         android:textSize="150sp" />
+
+    <TextView
+        android:id="@+id/timeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/temperatureView"
+        android:layout_centerHorizontal="true"
+        android:text="At 5:00 it will be"
+        android:textColor="@color/Cyan"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/locationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/timeLabel"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:textSize="24dp"
+        android:text="Las Vegas, NV"
+        android:textColor="@color/Cyan" />
+
+    <ImageView
+        android:id="@+id/conditionIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/locationLabel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        app:srcCompat="@drawable/cloudy_night" />
 
 </RelativeLayout>
