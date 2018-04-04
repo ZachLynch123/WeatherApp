@@ -11,7 +11,7 @@
 
 
     <TextView
-        android:id="@+id/temperatureView"
+        android:id="@+id/temperatureLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -24,7 +24,7 @@
         android:id="@+id/timeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/temperatureView"
+        android:layout_above="@+id/temperatureLabel"
         android:layout_centerHorizontal="true"
         android:text="At 5:00 it will be"
         android:textColor="@color/Cyan"
@@ -53,7 +53,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/temperatureView"
+        android:layout_below="@+id/temperatureLabel"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
