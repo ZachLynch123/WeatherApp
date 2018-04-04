@@ -50,4 +50,74 @@
         android:layout_alignParentStart="true"
         app:srcCompat="@drawable/cloudy_night" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/temperatureView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="HUMIDITY"
+                android:textColor="@color/Cyan" />
+
+            <TextView
+                android:id="@+id/humidityLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="0.88"
+                android:textColor="@color/Cyan"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="PRECIPITATION"
+                android:textColor="@color/Cyan" />
+
+            <TextView
+                android:id="@+id/precipLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="20%"
+                android:textColor="@color/Cyan"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/summaryLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/linearLayout"
+        android:layout_alignStart="@+id/locationLabel"
+        android:gravity="center_horizontal"
+        android:text="Some Dummy Text!"
+        android:textColor="@color/Cyan"
+        android:textSize="18dp" />
+
 </RelativeLayout>

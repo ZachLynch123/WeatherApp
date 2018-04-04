@@ -4,5 +4,5 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="Dark_Gray">#404040</color>
-    <color name="Cyan">#da00ffff</color>
+    <color name="Cyan">#00ffff</color>
 </resources>
