@@ -30,7 +30,7 @@ public class Stormy extends AppCompatActivity {
     // This task is "Synchronous". Need to switch to Asynchronous
     public static final String TAG = Stormy.class.getSimpleName();
 
-
+    // Used external library "ButterKnife" to set the views and their IDs to limit BoilerPlate code
     private CurrentWeather mCurrentWeather;
     @BindView(R.id.timeLabel) TextView mTimeLabel;
     @BindView(R.id.temperatureLabel) TextView mTemperatureLabel;
@@ -45,12 +45,16 @@ public class Stormy extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // instantiate Butterknife
         ButterKnife.bind(this);
+        // set progress bar to invisible by default
         mProgressBar.setVisibility(View.INVISIBLE);
 
+        // TODO: Use location services to get device's lat and lon
         final double latitude = 36.1699;
         final double longitude = -115.1398;
 
+        // OnClickListener to check for user input
         mRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
