@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="100"
+        android:text="- -"
         android:textColor="@color/Cyan"
         android:textSize="150sp" />
 
@@ -26,20 +26,20 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/temperatureLabel"
         android:layout_centerHorizontal="true"
-        android:text="At 5:00 it will be"
         android:textColor="@color/Cyan_50"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        tools:text="..." />
 
     <TextView
         android:id="@+id/locationLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/timeLabel"
+        android:layout_below="@+id/refreshButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp"
-        android:textSize="24dp"
+        android:layout_marginTop="21dp"
         android:text="Las Vegas, NV"
-        android:textColor="@color/Cyan" />
+        android:textColor="@color/Cyan"
+        android:textSize="24dp" />
 
     <ImageView
         android:id="@+id/conditionIcon"
@@ -77,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="0.88"
+                android:text="- -"
                 android:textColor="@color/Cyan"
                 android:textSize="24sp" />
         </LinearLayout>
@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="20%"
+                android:text="- -"
                 android:textColor="@color/Cyan"
                 android:textSize="24sp" />
         </LinearLayout>
@@ -116,7 +116,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:paddingBottom="30dp"
-        android:text="Clear"
+        android:text="Getting current weather.."
         android:textColor="@color/Cyan"
         android:textSize="24sp" />
 
@@ -124,12 +124,26 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_below="@+id/timeLabel"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="11dp"
+        android:layout_toEndOf="@+id/locationLabel"
         android:text="°"
         android:textColor="@color/Cyan_50"
         android:textSize="100dp" />
+
+    <ImageView
+        android:id="@+id/refreshButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/refresh" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/refreshButton"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

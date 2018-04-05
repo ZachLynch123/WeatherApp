@@ -6,7 +6,9 @@ import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,21 +38,41 @@ public class Stormy extends AppCompatActivity {
     @BindView(R.id.precipLabel) TextView mPrecipValue;
     @BindView(R.id.summaryLabel) TextView mSummaryLabel;
     @BindView(R.id.conditionIcon) ImageView mIconImageView;
-    @BindView(R.id.locationLabel) TextView mLocationLabel;
+    @BindView(R.id.refreshButton) ImageView mRefresh;
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        mProgressBar.setVisibility(View.INVISIBLE);
+
+        final double latitude = 36.1699;
+        final double longitude = -115.1398;
+
+        mRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getForecast(latitude, longitude);
+
+            }
+        });
 
 
+        getForecast(latitude, longitude);
+
+
+    }
+
+    private void getForecast(double latitude, double longitude) {
         String apiKey = "2cd94b53ee1806c983d10d877b5c94bd";
-        double latitude = 47.6062;
-        double longitude = -122.3321;
+
         String forecastUrl = "https://api.darksky.net/forecast/" + apiKey + "/" +
                 latitude + "," + longitude;
         if (isNetworkAvailable()) {
+            toggleRefresh();
+
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
                     .url(forecastUrl)
@@ -59,11 +81,23 @@ public class Stormy extends AppCompatActivity {
             call.enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            toggleRefresh();
+                        }
+                    });
+                    alertUserAboutError();
                 }
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            toggleRefresh();
+                        }
+                    });
                     try {
                         String jsonData = response.body().string();
                         if (response.isSuccessful()) {
@@ -88,8 +122,17 @@ public class Stormy extends AppCompatActivity {
         } else {
             Toast.makeText(this, R.string.network_unavailable_message, Toast.LENGTH_LONG).show();
         }
+    }
 
-
+    private void toggleRefresh() {
+        if (mProgressBar.getVisibility() == View.INVISIBLE) {
+            mProgressBar.setVisibility(View.VISIBLE);
+            mRefresh.setVisibility(View.INVISIBLE);
+        }
+        else {
+            mProgressBar.setVisibility(View.INVISIBLE);
+            mRefresh.setVisibility(View.VISIBLE);
+        }
     }
 
     private void updateDisplay() {
@@ -97,9 +140,7 @@ public class Stormy extends AppCompatActivity {
         mTimeLabel.setText("At " + mCurrentWeather.getFormattedTime() + " it will be");
         mHumidityValue.setText(mCurrentWeather.getHumidity() + "");
         mPrecipValue.setText(mCurrentWeather.getPrecipChance() + "%");
-        mLocationLabel.setText(mCurrentWeather.getTimeZone());
         mSummaryLabel.setText(mCurrentWeather.getSummary());
-
         Drawable drawable = getResources().getDrawable(mCurrentWeather.getIconId());
         mIconImageView.setImageDrawable(drawable);
     }
