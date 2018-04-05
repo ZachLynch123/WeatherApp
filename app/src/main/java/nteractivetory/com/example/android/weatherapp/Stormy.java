@@ -1,5 +1,6 @@
 package nteractivetory.com.example.android.weatherapp;
 
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -35,6 +36,7 @@ public class Stormy extends AppCompatActivity {
     @BindView(R.id.precipLabel) TextView mPrecipValue;
     @BindView(R.id.summaryLabel) TextView mSummaryLabel;
     @BindView(R.id.conditionIcon) ImageView mIconImageView;
+    @BindView(R.id.locationLabel) TextView mLocationLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +46,8 @@ public class Stormy extends AppCompatActivity {
 
 
         String apiKey = "2cd94b53ee1806c983d10d877b5c94bd";
-        double latitude = 36.1699;
-        double longitude = -115.1398;
+        double latitude = 47.6062;
+        double longitude = -122.3321;
         String forecastUrl = "https://api.darksky.net/forecast/" + apiKey + "/" +
                 latitude + "," + longitude;
         if (isNetworkAvailable()) {
@@ -95,7 +97,11 @@ public class Stormy extends AppCompatActivity {
         mTimeLabel.setText("At " + mCurrentWeather.getFormattedTime() + " it will be");
         mHumidityValue.setText(mCurrentWeather.getHumidity() + "");
         mPrecipValue.setText(mCurrentWeather.getPrecipChance() + "%");
+        mLocationLabel.setText(mCurrentWeather.getTimeZone());
         mSummaryLabel.setText(mCurrentWeather.getSummary());
+
+        Drawable drawable = getResources().getDrawable(mCurrentWeather.getIconId());
+        mIconImageView.setImageDrawable(drawable);
     }
 
     private CurrentWeather getCurrentDetails(String jsonData) throws JSONException {

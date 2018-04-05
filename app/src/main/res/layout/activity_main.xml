@@ -27,7 +27,7 @@
         android:layout_above="@+id/temperatureLabel"
         android:layout_centerHorizontal="true"
         android:text="At 5:00 it will be"
-        android:textColor="@color/Cyan"
+        android:textColor="@color/Cyan_50"
         android:textSize="18sp" />
 
     <TextView
@@ -46,7 +46,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/locationLabel"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         app:srcCompat="@drawable/cloudy_night" />
 
@@ -71,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="HUMIDITY"
-                android:textColor="@color/Cyan" />
+                android:textColor="@color/Cyan_50" />
 
             <TextView
                 android:id="@+id/humidityLabel"
@@ -95,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="PRECIPITATION"
-                android:textColor="@color/Cyan" />
+                android:textColor="@color/Cyan_50" />
 
             <TextView
                 android:id="@+id/precipLabel"
@@ -113,11 +112,24 @@
         android:id="@+id/summaryLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/linearLayout"
-        android:layout_alignStart="@+id/locationLabel"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
-        android:text="Some Dummy Text!"
+        android:paddingBottom="30dp"
+        android:text="Clear"
         android:textColor="@color/Cyan"
-        android:textSize="18dp" />
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/timeLabel"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="11dp"
+        android:text="°"
+        android:textColor="@color/Cyan_50"
+        android:textSize="100dp" />
 
 </RelativeLayout>
