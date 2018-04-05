@@ -27,6 +27,7 @@ public class Stormy extends AppCompatActivity {
     // This task is "Synchronous". Need to switch to Asynchronous
     public static final String TAG = Stormy.class.getSimpleName();
 
+
     private CurrentWeather mCurrentWeather;
     @BindView(R.id.timeLabel) TextView mTimeLabel;
     @BindView(R.id.temperatureLabel) TextView mTemperatureLabel;
@@ -65,6 +66,12 @@ public class Stormy extends AppCompatActivity {
                         String jsonData = response.body().string();
                         if (response.isSuccessful()) {
                             mCurrentWeather = getCurrentDetails(jsonData);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    updateDisplay();
+                                }
+                            });
 
                         } else {
                             alertUserAboutError();
@@ -83,6 +90,10 @@ public class Stormy extends AppCompatActivity {
 
     }
 
+    private void updateDisplay() {
+        mTemperatureLabel.setText(mCurrentWeather.getTemperature() + "");
+    }
+
     private CurrentWeather getCurrentDetails(String jsonData) throws JSONException {
         JSONObject forecast = new JSONObject(jsonData);
         String timezone = forecast.getString("timezone");
@@ -97,7 +108,6 @@ public class Stormy extends AppCompatActivity {
         currentWeather.setSummary(currently.getString("summary"));
         currentWeather.setIcon(currently.getString("icon"));
         currentWeather.setTimeZone(timezone);
-
         Log.d(TAG, currentWeather.getFormattedTime());
 
         return currentWeather;
