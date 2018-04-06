@@ -25,6 +25,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+//TODO: animate the background. pick background based on condition
 public class Stormy extends AppCompatActivity {
     // Current code throws a "Network on main thread exception"
     // This task is "Synchronous". Need to switch to Asynchronous

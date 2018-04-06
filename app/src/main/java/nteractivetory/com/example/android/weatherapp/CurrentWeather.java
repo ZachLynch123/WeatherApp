@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class CurrentWeather {
+
+    // variables for each element from the api's JSON formatted data
     private String mIcon;
     private long mTime;
     private double mTemperature;
@@ -14,6 +16,7 @@ public class CurrentWeather {
     private String mSummary;
     private String mTimeZone;
 
+    // getters and setters for each variable for other classes to use
     public String getTimeZone() {
         return mTimeZone;
     }
@@ -31,8 +34,9 @@ public class CurrentWeather {
     }
 
     public int getIconId(){
+        // default icon is clear day
         int iconId = R.drawable.clear_day;
-
+        // bunch of if/elseIf statements to get the correct icon for the condition
         if (mIcon.equals("clear-day")){
             iconId = R.drawable.clear_day;
         }
@@ -70,8 +74,9 @@ public class CurrentWeather {
         return mTime;
     }
 
+    // formatted time to display actual readable time, not UNIX time
     public String getFormattedTime(){
-        SimpleDateFormat formatter = new SimpleDateFormat("h:mm: a");
+        SimpleDateFormat formatter = new SimpleDateFormat("h:mm a");
         formatter.setTimeZone(TimeZone.getTimeZone(getTimeZone()));
         Date dateTime = new Date(getTime() * 1000);
         String timeString = formatter.format(dateTime);
@@ -83,6 +88,8 @@ public class CurrentWeather {
     }
 
     public int getTemperature() {
+
+        // gets temp, rounds it to the nearest integer
         return (int) Math.round(mTemperature);
     }
 
@@ -99,6 +106,8 @@ public class CurrentWeather {
     }
 
     public int getPrecipChance() {
+
+        // displays precipitation chance as a rounded percentage
         double precipPercentage = mPrecipChance * 100;
         return (int) Math.round(precipPercentage);
     }
