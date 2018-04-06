@@ -1,4 +1,4 @@
-package nteractivetory.com.example.android.weatherapp;
+package nteractivetory.com.example.android.weatherapp.ui;
 
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
@@ -19,6 +19,8 @@ import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import nteractivetory.com.example.android.weatherapp.R;
+import nteractivetory.com.example.android.weatherapp.weather.Current;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -32,15 +34,20 @@ public class Stormy extends AppCompatActivity {
     public static final String TAG = Stormy.class.getSimpleName();
 
     // Used external library "ButterKnife" to set the views and their IDs to limit BoilerPlate code
-    private CurrentWeather mCurrentWeather;
-    @BindView(R.id.timeLabel) TextView mTimeLabel;
+    private Current mCurrent;
+    @BindView(R.id.timeLabel)
+    TextView mTimeLabel;
     @BindView(R.id.temperatureLabel) TextView mTemperatureLabel;
     @BindView(R.id.humidityLabel) TextView mHumidityValue;
     @BindView(R.id.precipLabel) TextView mPrecipValue;
     @BindView(R.id.summaryLabel) TextView mSummaryLabel;
-    @BindView(R.id.conditionIcon) ImageView mIconImageView;
+    @BindView(R.id.conditionIcon)
+    ImageView mIconImageView;
     @BindView(R.id.refreshButton) ImageView mRefresh;
-    @BindView(R.id.progressBar) ProgressBar mProgressBar;
+    @BindView(R.id.progressBar)
+    ProgressBar mProgressBar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +113,7 @@ public class Stormy extends AppCompatActivity {
                     try {
                         String jsonData = response.body().string();
                         if (response.isSuccessful()) {
-                            mCurrentWeather = getCurrentDetails(jsonData);
+                            mCurrent = getCurrentDetails(jsonData);
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -141,32 +148,32 @@ public class Stormy extends AppCompatActivity {
     }
 
     private void updateDisplay() {
-        mTemperatureLabel.setText(mCurrentWeather.getTemperature() + "");
-        mTimeLabel.setText("At " + mCurrentWeather.getFormattedTime() + " it will be");
-        mHumidityValue.setText(mCurrentWeather.getHumidity() + "");
-        mPrecipValue.setText(mCurrentWeather.getPrecipChance() + "%");
-        mSummaryLabel.setText(mCurrentWeather.getSummary());
-        Drawable drawable = getResources().getDrawable(mCurrentWeather.getIconId());
+        mTemperatureLabel.setText(mCurrent.getTemperature() + "");
+        mTimeLabel.setText("At " + mCurrent.getFormattedTime() + " it will be");
+        mHumidityValue.setText(mCurrent.getHumidity() + "");
+        mPrecipValue.setText(mCurrent.getPrecipChance() + "%");
+        mSummaryLabel.setText(mCurrent.getSummary());
+        Drawable drawable = getResources().getDrawable(mCurrent.getIconId());
         mIconImageView.setImageDrawable(drawable);
     }
 
-    private CurrentWeather getCurrentDetails(String jsonData) throws JSONException {
+    private Current getCurrentDetails(String jsonData) throws JSONException {
         JSONObject forecast = new JSONObject(jsonData);
         String timezone = forecast.getString("timezone");
         Log.i(TAG,"From JSON "+ timezone);
         JSONObject currently =  forecast.getJSONObject("currently");
         Log.i(TAG, "From JSON " + currently);
-        CurrentWeather currentWeather = new CurrentWeather();
-        currentWeather.setHumidity(currently.getDouble("humidity"));
-        currentWeather.setTime(currently.getLong("time"));
-        currentWeather.setTemperature(currently.getDouble("temperature"));
-        currentWeather.setPrecipChance(currently.getDouble("precipProbability"));
-        currentWeather.setSummary(currently.getString("summary"));
-        currentWeather.setIcon(currently.getString("icon"));
-        currentWeather.setTimeZone(timezone);
-        Log.d(TAG, currentWeather.getFormattedTime());
+        Current current = new Current();
+        current.setHumidity(currently.getDouble("humidity"));
+        current.setTime(currently.getLong("time"));
+        current.setTemperature(currently.getDouble("temperature"));
+        current.setPrecipChance(currently.getDouble("precipProbability"));
+        current.setSummary(currently.getString("summary"));
+        current.setIcon(currently.getString("icon"));
+        current.setTimeZone(timezone);
+        Log.d(TAG, current.getFormattedTime());
 
-        return currentWeather;
+        return current;
     }
 
     private boolean isNetworkAvailable() {

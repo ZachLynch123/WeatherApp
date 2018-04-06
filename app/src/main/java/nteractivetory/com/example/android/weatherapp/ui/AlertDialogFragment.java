@@ -1,10 +1,12 @@
-package nteractivetory.com.example.android.weatherapp;
+package nteractivetory.com.example.android.weatherapp.ui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
+
+import nteractivetory.com.example.android.weatherapp.R;
 
 /**
  * Created by Allison on 3/30/2018.

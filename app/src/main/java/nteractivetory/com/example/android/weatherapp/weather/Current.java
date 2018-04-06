@@ -1,11 +1,13 @@
-package nteractivetory.com.example.android.weatherapp;
+package nteractivetory.com.example.android.weatherapp.weather;
 
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class CurrentWeather {
+import nteractivetory.com.example.android.weatherapp.R;
+
+public class Current {
 
     // variables for each element from the api's JSON formatted data
     private String mIcon;
