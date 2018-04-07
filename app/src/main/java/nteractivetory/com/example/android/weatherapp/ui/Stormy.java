@@ -1,5 +1,6 @@
 package nteractivetory.com.example.android.weatherapp.ui;
 
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -21,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import nteractivetory.com.example.android.weatherapp.R;
 import nteractivetory.com.example.android.weatherapp.weather.Current;
+import nteractivetory.com.example.android.weatherapp.weather.Forecast;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -34,7 +36,7 @@ public class Stormy extends AppCompatActivity {
     public static final String TAG = Stormy.class.getSimpleName();
 
     // Used external library "ButterKnife" to set the views and their IDs to limit BoilerPlate code
-    private Current mCurrent;
+    private Forecast mForecast;
     @BindView(R.id.timeLabel)
     TextView mTimeLabel;
     @BindView(R.id.temperatureLabel) TextView mTemperatureLabel;
@@ -113,7 +115,7 @@ public class Stormy extends AppCompatActivity {
                     try {
                         String jsonData = response.body().string();
                         if (response.isSuccessful()) {
-                            mCurrent = getCurrentDetails(jsonData);
+                            mForecast = parseForecastDetails(jsonData);
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -148,13 +150,23 @@ public class Stormy extends AppCompatActivity {
     }
 
     private void updateDisplay() {
-        mTemperatureLabel.setText(mCurrent.getTemperature() + "");
-        mTimeLabel.setText("At " + mCurrent.getFormattedTime() + " it will be");
-        mHumidityValue.setText(mCurrent.getHumidity() + "");
-        mPrecipValue.setText(mCurrent.getPrecipChance() + "%");
-        mSummaryLabel.setText(mCurrent.getSummary());
-        Drawable drawable = getResources().getDrawable(mCurrent.getIconId());
+        Current current = mForecast.getCurrent();
+
+        mTemperatureLabel.setText(current.getTemperature() + "");
+        mTimeLabel.setText("At " + current.getFormattedTime() + " it will be");
+        mHumidityValue.setText(current.getHumidity() + "");
+        mPrecipValue.setText(current.getPrecipChance() + "%");
+        mSummaryLabel.setText(current.getSummary());
+        Drawable drawable = getResources().getDrawable(current.getIconId());
         mIconImageView.setImageDrawable(drawable);
+    }
+
+    private Forecast parseForecastDetails(String jsonData) throws JSONException {
+        Forecast forecast = new Forecast();
+
+        forecast.setCurrent(getCurrentDetails(jsonData));
+
+        return forecast;
     }
 
     private Current getCurrentDetails(String jsonData) throws JSONException {
