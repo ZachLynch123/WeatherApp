@@ -1,6 +1,5 @@
 package nteractivetory.com.example.android.weatherapp.ui;
 
-import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -13,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,7 +22,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import nteractivetory.com.example.android.weatherapp.R;
 import nteractivetory.com.example.android.weatherapp.weather.Current;
+import nteractivetory.com.example.android.weatherapp.weather.Daily;
 import nteractivetory.com.example.android.weatherapp.weather.Forecast;
+import nteractivetory.com.example.android.weatherapp.weather.Hour;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -43,11 +45,9 @@ public class Stormy extends AppCompatActivity {
     @BindView(R.id.humidityLabel) TextView mHumidityValue;
     @BindView(R.id.precipLabel) TextView mPrecipValue;
     @BindView(R.id.summaryLabel) TextView mSummaryLabel;
-    @BindView(R.id.conditionIcon)
-    ImageView mIconImageView;
+    @BindView(R.id.conditionIcon) ImageView mIconImageView;
     @BindView(R.id.refreshButton) ImageView mRefresh;
-    @BindView(R.id.progressBar)
-    ProgressBar mProgressBar;
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
 
 
 
@@ -73,10 +73,7 @@ public class Stormy extends AppCompatActivity {
             }
         });
 
-
         getForecast(latitude, longitude);
-
-
     }
 
     private void getForecast(double latitude, double longitude) {
@@ -165,8 +162,22 @@ public class Stormy extends AppCompatActivity {
         Forecast forecast = new Forecast();
 
         forecast.setCurrent(getCurrentDetails(jsonData));
-
+        forecast.setHourlyForecast(getHourlyForecast(jsonData));
+        forecast.setDailyForecast(getDailyForecast(jsonData));
         return forecast;
+    }
+
+    private Daily[] getDailyForecast(String jsonData) {
+            return new Daily[0];
+    }
+
+    private Hour[] getHourlyForecast(String jsonData) throws JSONException {
+        JSONObject forecast = new JSONObject(jsonData);
+        String timezone = forecast.getString("timezone");
+        JSONObject hourly = forecast.getJSONObject("hourly");
+        JSONArray data = hourly.getJSONArray("data");
+        Hour[] hours = new Hour[data.length()];
+        return hours;
     }
 
     private Current getCurrentDetails(String jsonData) throws JSONException {
