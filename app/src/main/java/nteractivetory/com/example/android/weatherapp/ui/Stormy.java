@@ -177,7 +177,7 @@ public class Stormy extends AppCompatActivity {
         for (int i = 0; i < data.length(); i++){
             JSONObject jsonDay = data.getJSONObject(i);
             Daily day = new Daily();
-            day.setSummary((jsonDay.getString("summary"));
+            day.setSummary((jsonDay.getString("summary")));
             day.setIcon(jsonDay.getString("icon"));
             day.setTemperatureMax(jsonDay.getDouble("temperatureMax"));
             day.setTime(jsonDay.getLong("time"));
