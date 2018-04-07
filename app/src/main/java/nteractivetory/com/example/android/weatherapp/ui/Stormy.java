@@ -171,7 +171,20 @@ public class Stormy extends AppCompatActivity {
         JSONObject forecast = new JSONObject(jsonData);
         String timezone = forecast.getString("timezone");
         JSONObject daily = forecast.getJSONObject("daily");
-        return new Daily[0];
+        JSONArray data = daily.getJSONArray("data");
+
+        Daily[] days = new Daily[data.length()];
+        for (int i = 0; i < data.length(); i++){
+            JSONObject jsonDay = data.getJSONObject(i);
+            Daily day = new Daily();
+            day.setSummary((jsonDay.getString("summary"));
+            day.setIcon(jsonDay.getString("icon"));
+            day.setTemperatureMax(jsonDay.getDouble("temperatureMax"));
+            day.setTime(jsonDay.getLong("time"));
+            day.setTimeZone(timezone);
+            days[i] = day;
+        }
+        return days;
     }
 
     private Hour[] getHourlyForecast(String jsonData) throws JSONException {
@@ -179,6 +192,7 @@ public class Stormy extends AppCompatActivity {
         String timezone = forecast.getString("timezone");
         JSONObject hourly = forecast.getJSONObject("hourly");
         JSONArray data = hourly.getJSONArray("data");
+
         Hour[] hours = new Hour[data.length()];
         for (int i = 0; i < data.length(); i++){
             JSONObject jsonHour = data.getJSONObject(i);

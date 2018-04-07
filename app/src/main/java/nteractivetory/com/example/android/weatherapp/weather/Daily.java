@@ -6,6 +6,15 @@ public class Daily {
     private String mSummary;
     private double mTemperatureMax;
     private String mTimeZone;
+    private String mIcon;
+
+    public String getIcon() {
+        return mIcon;
+    }
+
+    public void setIcon(String icon) {
+        mIcon = icon;
+    }
 
     public long getTime() {
         return mTime;
