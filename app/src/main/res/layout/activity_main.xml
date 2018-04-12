@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:background="@color/Dark_Gray"
     tools:context="nteractivetory.com.example.android.weatherapp.ui.Stormy"
-    android:padding="32dp"
+    android:paddingTop="32dp"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
     >
 
 
@@ -14,8 +16,9 @@
         android:id="@+id/temperatureLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/locationLabel"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="31dp"
         android:text="- -"
         android:textColor="@color/Cyan"
         android:textSize="150sp" />
@@ -54,7 +57,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/temperatureLabel"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="70dp"
         android:orientation="horizontal"
         android:id="@+id/linearLayout">
 
@@ -100,10 +103,14 @@
                 android:id="@+id/precipLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/linearLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="18dp"
                 android:gravity="center_horizontal"
                 android:text="- -"
                 android:textColor="@color/Cyan"
                 android:textSize="24sp" />
+
         </LinearLayout>
 
     </LinearLayout>
@@ -114,8 +121,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
         android:gravity="center_horizontal"
-        android:paddingBottom="30dp"
+        android:paddingBottom="10dp"
         android:text="Getting current weather.."
         android:textColor="@color/Cyan"
         android:textSize="24sp" />
@@ -145,5 +153,31 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/refreshButton"
         android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/hourlyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#40FFFFFF"
+            android:text="Hourly"
+            android:textColor="@color/Cyan" />
+
+        <Button
+            android:id="@+id/dailyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#40FFFFFF"
+            android:text="Daily"
+            android:textColor="@color/Cyan" />
+    </LinearLayout>
 
 </RelativeLayout>
