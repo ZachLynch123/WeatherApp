@@ -1,5 +1,6 @@
 package nteractivetory.com.example.android.weatherapp.ui;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -20,6 +22,8 @@ import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
 import nteractivetory.com.example.android.weatherapp.R;
 import nteractivetory.com.example.android.weatherapp.weather.Current;
 import nteractivetory.com.example.android.weatherapp.weather.Daily;
@@ -48,6 +52,7 @@ public class Stormy extends AppCompatActivity {
     @BindView(R.id.conditionIcon) ImageView mIconImageView;
     @BindView(R.id.refreshButton) ImageView mRefresh;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
+    @BindView(R.id.dailyButton) Button mDailyButton;
 
 
 
@@ -242,5 +247,10 @@ public class Stormy extends AppCompatActivity {
     private void alertUserAboutError() {
         AlertDialogFragment dialog = new AlertDialogFragment();
         dialog.show(getFragmentManager(), "error_dialog");
+    }
+    @OnClick (R.id.dailyButton)
+    public void startDailyActivity(View view){
+        Intent intent = new Intent(this, DailyForecastActivity.class);
+        startActivity(intent);
     }
 }
