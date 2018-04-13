@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Dark_Gray"
+    android:background="@drawable/bg_gradient"
     tools:context="nteractivetory.com.example.android.weatherapp.ui.Stormy"
     android:paddingTop="32dp"
     android:paddingLeft="32dp"
@@ -27,8 +27,9 @@
         android:id="@+id/timeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/temperatureLabel"
+        android:layout_below="@+id/locationLabel"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp"
         android:textColor="@color/Cyan_50"
         android:textSize="18sp"
         tools:text="..." />
@@ -80,6 +81,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
+                android:layout_alignTop="@+id/linearLayout"
+                android:layout_marginTop="18dp"
                 android:text="- -"
                 android:textColor="@color/Cyan"
                 android:textSize="24sp" />
@@ -119,11 +122,10 @@
         android:id="@+id/summaryLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/linearLayout2"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
         android:gravity="center_horizontal"
-        android:paddingBottom="10dp"
+        android:paddingBottom="50dp"
         android:text="Getting current weather.."
         android:textColor="@color/Cyan"
         android:textSize="24sp" />
@@ -159,7 +161,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout2">
 
         <Button
             android:id="@+id/hourlyButton"
@@ -177,7 +180,8 @@
             android:layout_weight="1"
             android:background="#40FFFFFF"
             android:text="Daily"
-            android:textColor="@color/Cyan" />
+            android:textColor="@color/Cyan"
+            android:layout_marginLeft="2dp"/>
     </LinearLayout>
 
 </RelativeLayout>
