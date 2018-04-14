@@ -40,6 +40,7 @@ public class Stormy extends AppCompatActivity {
     // Current code throws a "Network on main thread exception"
     // This task is "Synchronous". Need to switch to Asynchronous
     public static final String TAG = Stormy.class.getSimpleName();
+    public static final String DAILY_FORECAST = "DAILY_FORECAST";
 
     // Used external library "ButterKnife" to set the views and their IDs to limit BoilerPlate code
     private Forecast mForecast;
@@ -251,6 +252,7 @@ public class Stormy extends AppCompatActivity {
     @OnClick (R.id.dailyButton)
     public void startDailyActivity(View view){
         Intent intent = new Intent(this, DailyForecastActivity.class);
+        intent.putExtra(DAILY_FORECAST, mForecast.getDailyForecast());
         startActivity(intent);
     }
 }

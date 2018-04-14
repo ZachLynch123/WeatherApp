@@ -52,6 +52,8 @@ public class DayAdapter extends BaseAdapter {
             holder.iconImageView = view.findViewById(R.id.iconImageView);
             holder.temperatureLabel = view.findViewById(R.id.temperatureLabel);
             holder.dayLabel = view.findViewById(R.id.dayNameLabel);
+            holder.imgCircleView = view.findViewById(R.id.circleImageView);
+
 
             view.setTag(holder);
         }
@@ -63,6 +65,7 @@ public class DayAdapter extends BaseAdapter {
         holder.iconImageView.setImageResource(day.getIconId());
         holder.temperatureLabel.setText(day.getTemperatureMax() + "");
         holder.dayLabel.setText(day.getDayOfTheWeek());
+        holder.imgCircleView.setImageResource(R.drawable.bg_temperature);
 
         return view;
     }
@@ -76,6 +79,7 @@ public class DayAdapter extends BaseAdapter {
         ImageView iconImageView; //public by default
         TextView temperatureLabel;
         TextView dayLabel;
+        ImageView imgCircleView;
     }
 }
 
