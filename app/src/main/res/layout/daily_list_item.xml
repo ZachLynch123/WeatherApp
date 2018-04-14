@@ -3,7 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="wrap_content"
-    tools:background="#ffaa00">
+    tools:background="#000033"
+    android:paddingLeft="64dp"
+    android:paddingRight="32dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
 
     <ImageView
         android:id="@+id/circleImageView"
@@ -18,8 +22,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginStart="17dp"
+        android:layout_toRightOf="@+id/circleImageView"
         android:layout_toEndOf="@+id/circleImageView"
+        android:paddingLeft="10dp"
         app:srcCompat="@drawable/clear_day" />
 
     <TextView
@@ -27,10 +32,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/circleImageView"
+        android:layout_toRightOf="@+id/iconImageView"
+        android:layout_toEndOf="@+id/iconImageView"
         android:textColor="#FFFFFFFF"
         android:textSize="20sp"
-        tools:text="Wednesday"/>
+        tools:text="Wednesday"
+        android:paddingLeft="10dp"/>
 
     <TextView
         android:id="@+id/temperatureLabel"
