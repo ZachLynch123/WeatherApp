@@ -29,6 +29,7 @@ import nteractivetory.com.example.android.weatherapp.weather.Current;
 import nteractivetory.com.example.android.weatherapp.weather.Daily;
 import nteractivetory.com.example.android.weatherapp.weather.Forecast;
 import nteractivetory.com.example.android.weatherapp.weather.Hour;
+import nteractivetory.com.example.android.weatherapp.weather.HourlyForecastActivity;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -41,6 +42,7 @@ public class Stormy extends AppCompatActivity {
     // This task is "Synchronous". Need to switch to Asynchronous
     public static final String TAG = Stormy.class.getSimpleName();
     public static final String DAILY_FORECAST = "DAILY_FORECAST";
+    public static final String HOURLY_FORECAST = "HOURLY_FORECAST";
 
     // Used external library "ButterKnife" to set the views and their IDs to limit BoilerPlate code
     private Forecast mForecast;
@@ -253,6 +255,12 @@ public class Stormy extends AppCompatActivity {
     public void startDailyActivity(View view){
         Intent intent = new Intent(this, DailyForecastActivity.class);
         intent.putExtra(DAILY_FORECAST, mForecast.getDailyForecast());
+        startActivity(intent);
+    }
+    @OnClick (R.id.hourlyButton)
+    public void startHourlyActivity(View view){
+        Intent intent = new Intent(this, HourlyForecastActivity.class);
+        intent.putExtra(HOURLY_FORECAST, mForecast.getHourlyForecast());
         startActivity(intent);
     }
 }
