@@ -51,4 +51,12 @@
         android:gravity="center"
         android:textColor="#000033"
         tools:text="100" />
+
+    <TextView
+        android:id="@+id/thisWeekLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text=" " />
 </RelativeLayout>

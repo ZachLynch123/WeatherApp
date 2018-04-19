@@ -40,9 +40,9 @@ public class DayAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        // basically recyclerView
         ViewHolder holder;
 
+        // if no view has been created yet, create one
         if (view == null){
             // brand new view
             // inflater android object that turns xml layouts into views in code we can use
