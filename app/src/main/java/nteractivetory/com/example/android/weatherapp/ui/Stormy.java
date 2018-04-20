@@ -1,7 +1,12 @@
 package nteractivetory.com.example.android.weatherapp.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -46,17 +51,27 @@ public class Stormy extends AppCompatActivity {
 
     // Used external library "ButterKnife" to set the views and their IDs to limit BoilerPlate code
     private Forecast mForecast;
+    private LocationManager mLocationManager;
+    private String provider;
+
     @BindView(R.id.timeLabel)
     TextView mTimeLabel;
-    @BindView(R.id.temperatureLabel) TextView mTemperatureLabel;
-    @BindView(R.id.humidityLabel) TextView mHumidityValue;
-    @BindView(R.id.precipLabel) TextView mPrecipValue;
-    @BindView(R.id.summaryLabel) TextView mSummaryLabel;
-    @BindView(R.id.conditionIcon) ImageView mIconImageView;
-    @BindView(R.id.refreshButton) ImageView mRefresh;
-    @BindView(R.id.progressBar) ProgressBar mProgressBar;
-    @BindView(R.id.dailyButton) Button mDailyButton;
-
+    @BindView(R.id.temperatureLabel)
+    TextView mTemperatureLabel;
+    @BindView(R.id.humidityLabel)
+    TextView mHumidityValue;
+    @BindView(R.id.precipLabel)
+    TextView mPrecipValue;
+    @BindView(R.id.summaryLabel)
+    TextView mSummaryLabel;
+    @BindView(R.id.conditionIcon)
+    ImageView mIconImageView;
+    @BindView(R.id.refreshButton)
+    ImageView mRefresh;
+    @BindView(R.id.progressBar)
+    ProgressBar mProgressBar;
+    @BindView(R.id.dailyButton)
+    Button mDailyButton;
 
 
     @Override
@@ -67,6 +82,7 @@ public class Stormy extends AppCompatActivity {
         ButterKnife.bind(this);
         // set progress bar to invisible by default
         mProgressBar.setVisibility(View.INVISIBLE);
+        // use location manager to get system location services services
 
         // TODO: Use location services to get device's lat and lon
         final double latitude = 36.1699;
@@ -131,8 +147,7 @@ public class Stormy extends AppCompatActivity {
                         } else {
                             alertUserAboutError();
                         }
-                    }
-                    catch (IOException | JSONException e) {
+                    } catch (IOException | JSONException e) {
                         Log.e(TAG, "Exception caught: ", e);
                     }
 
@@ -147,8 +162,7 @@ public class Stormy extends AppCompatActivity {
         if (mProgressBar.getVisibility() == View.INVISIBLE) {
             mProgressBar.setVisibility(View.VISIBLE);
             mRefresh.setVisibility(View.INVISIBLE);
-        }
-        else {
+        } else {
             mProgressBar.setVisibility(View.INVISIBLE);
             mRefresh.setVisibility(View.VISIBLE);
         }
@@ -182,7 +196,7 @@ public class Stormy extends AppCompatActivity {
         JSONArray data = daily.getJSONArray("data");
 
         Daily[] days = new Daily[data.length()];
-        for (int i = 0; i < data.length(); i++){
+        for (int i = 0; i < data.length(); i++) {
             JSONObject jsonDay = data.getJSONObject(i);
             Daily day = new Daily();
             day.setSummary((jsonDay.getString("summary")));
@@ -202,7 +216,7 @@ public class Stormy extends AppCompatActivity {
         JSONArray data = hourly.getJSONArray("data");
 
         Hour[] hours = new Hour[data.length()];
-        for (int i = 0; i < data.length(); i++){
+        for (int i = 0; i < data.length(); i++) {
             JSONObject jsonHour = data.getJSONObject(i);
             Hour hour = new Hour();
             hour.setSummary(jsonHour.getString("summary"));
@@ -219,8 +233,8 @@ public class Stormy extends AppCompatActivity {
     private Current getCurrentDetails(String jsonData) throws JSONException {
         JSONObject forecast = new JSONObject(jsonData);
         String timezone = forecast.getString("timezone");
-        Log.i(TAG,"From JSON "+ timezone);
-        JSONObject currently =  forecast.getJSONObject("currently");
+        Log.i(TAG, "From JSON " + timezone);
+        JSONObject currently = forecast.getJSONObject("currently");
         Log.i(TAG, "From JSON " + currently);
         Current current = new Current();
         current.setHumidity(currently.getDouble("humidity"));
@@ -251,16 +265,19 @@ public class Stormy extends AppCompatActivity {
         AlertDialogFragment dialog = new AlertDialogFragment();
         dialog.show(getFragmentManager(), "error_dialog");
     }
-    @OnClick (R.id.dailyButton)
-    public void startDailyActivity(View view){
+
+    @OnClick(R.id.dailyButton)
+    public void startDailyActivity(View view) {
         Intent intent = new Intent(this, DailyForecastActivity.class);
         intent.putExtra(DAILY_FORECAST, mForecast.getDailyForecast());
         startActivity(intent);
     }
-    @OnClick (R.id.hourlyButton)
-    public void startHourlyActivity(View view){
+
+    @OnClick(R.id.hourlyButton)
+    public void startHourlyActivity(View view) {
         Intent intent = new Intent(this, HourlyForecastActivity.class);
         intent.putExtra(HOURLY_FORECAST, mForecast.getHourlyForecast());
         startActivity(intent);
     }
 }
+

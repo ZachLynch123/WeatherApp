@@ -54,7 +54,7 @@ public class Hour implements Parcelable {
     @Override
     public int describeContents() {
         return 0;
-    }
+    } // ignore
 
     @Override
     public void writeToParcel(Parcel dest, int i) {
@@ -64,7 +64,7 @@ public class Hour implements Parcelable {
         dest.writeString(mIcon);
         dest.writeString(mTimeZone);
     }
-    private Hour(Parcel in){
+    private Hour(Parcel in){ // HAS TO BE IN SAME ORDER AS IT WAS WRITTEN
         mTime = in.readLong();
         mSummary = in.readString();
         mTemperature = in.readDouble();
