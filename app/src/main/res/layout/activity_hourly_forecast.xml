@@ -9,7 +9,7 @@
     android:paddingBottom="16dp"
     android:paddingTop="16dp"
     android:background="@drawable/bg_gradient"
-    tools:context="nteractivetory.com.example.android.weatherapp.weather.HourlyForecastActivity">
+    tools:context="nteractivetory.com.example.android.weatherapp.ui.HourlyForecastActivity">
 
 
     <android.support.v7.widget.RecyclerView

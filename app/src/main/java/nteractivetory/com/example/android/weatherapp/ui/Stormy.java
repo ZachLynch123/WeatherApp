@@ -1,11 +1,7 @@
 package nteractivetory.com.example.android.weatherapp.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -27,14 +23,12 @@ import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import nteractivetory.com.example.android.weatherapp.R;
 import nteractivetory.com.example.android.weatherapp.weather.Current;
 import nteractivetory.com.example.android.weatherapp.weather.Daily;
 import nteractivetory.com.example.android.weatherapp.weather.Forecast;
 import nteractivetory.com.example.android.weatherapp.weather.Hour;
-import nteractivetory.com.example.android.weatherapp.weather.HourlyForecastActivity;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;

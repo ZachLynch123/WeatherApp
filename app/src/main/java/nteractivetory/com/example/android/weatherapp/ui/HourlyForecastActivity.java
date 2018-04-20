@@ -1,4 +1,4 @@
-package nteractivetory.com.example.android.weatherapp.weather;
+package nteractivetory.com.example.android.weatherapp.ui;
 
 import android.content.Intent;
 import android.os.Parcelable;
@@ -8,7 +8,9 @@ import android.os.Bundle;
 import java.util.Arrays;
 
 import nteractivetory.com.example.android.weatherapp.R;
+import nteractivetory.com.example.android.weatherapp.adapters.HourAdapter;
 import nteractivetory.com.example.android.weatherapp.ui.Stormy;
+import nteractivetory.com.example.android.weatherapp.weather.Hour;
 
 public class HourlyForecastActivity extends AppCompatActivity {
 
@@ -22,5 +24,7 @@ public class HourlyForecastActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Parcelable[] parcelables = intent.getParcelableArrayExtra(Stormy.HOURLY_FORECAST);
         mHours = Arrays.copyOf(parcelables, parcelables.length, Hour[].class);
+        HourAdapter adapter = new HourAdapter(this, mHours);
+
     }
 }
