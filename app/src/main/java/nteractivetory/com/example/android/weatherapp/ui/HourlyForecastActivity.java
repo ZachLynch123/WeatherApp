@@ -42,4 +42,16 @@ public class HourlyForecastActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
 
     }
+    /*
+    some notes on ListViews and RecyclerViews
+
+        get a set of data to display. array, araylist, hashmap etc.
+
+    add a ListView or RecyclerView to display. can be a grid view
+
+    design custom layout for each item
+
+    create an adapter to map the data to the layout
+
+     */
 }
